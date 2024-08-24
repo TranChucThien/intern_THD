@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-controller-manager
+  namespace: kube-system
+  labels:
+    k8s-app: kube-controller-manager
+spec:
+  containers:
+  - name: kube-controller-manager
+    image: gcr.io/google-containers/kube-controller-manager:v1.17.10-rc.0
+    command:
+    - kube-controller-manager
+    - --bind-address=0.0.0.0
+    - --port=10252
+    - --leader-elect=true
+    - --v=2
+    ports:
+    - containerPort: 10252
+      name: metrics
+      protocol: TCP
+    volumeMounts:
+    - name: var-lib-kubelet
+      mountPath: /var/lib/kubelet
+    - name: var-run
+      mountPath: /var/run
+  volumes:
+  - name: var-lib-kubelet
+    hostPath:
+      path: /var/lib/kubelet
+  - name: var-run
+    hostPath:
+      path: /var/run

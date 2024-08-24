@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-scheduler
+  namespace: kube-system
+  labels:
+    k8s-app: kube-scheduler
+spec:
+  containers:
+  - name: kube-scheduler
+    image: gcr.io/google-containers/kube-scheduler:v1.17.10-rc.0
+    command:
+    - kube-scheduler
+    ports:
+    - containerPort: 10251
+      name: metrics
+      protocol: TCP
+    volumeMounts:
+    - name: var-lib-kubelet
+      mountPath: /var/lib/kubelet
+    - name: var-run
+      mountPath: /var/run
+  volumes:
+  - name: var-lib-kubelet
+    hostPath:
+      path: /var/lib/kubelet
+  - name: var-run
+    hostPath:
+      path: /var/run
+
