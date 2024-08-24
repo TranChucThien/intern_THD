@@ -9,14 +9,6 @@ This project stores the source code and configurations required to collect metri
 - kube-scheduler
 - kubelet
 
-## Notes
-- Ensure that the Kubernetes components are accessible from the Datadog Agent.
-- Create services for the pods of the Kubernetes components to enable Datadog auto-discovery.
-- Validate your configuration by checking the Datadog dashboard for the metrics.
-- Use the following command to apply the manifest files:
-  ```bash
-  kubectl apply -f <manifest-file>
-
 ## How to Collect Kubernetes Component Metrics
 
 ### 1. Enable Metrics for Kubernetes Components
@@ -28,4 +20,16 @@ Refer to the sample configurations in the provided `K8s_component_metrics.docx` 
 Once the metrics are enabled, you can test the endpoints by using `curl`. Example:
 
 ```bash
-curl http://<component-bind-address>:<port>/metrics  
+curl http://<component-bind-address>:<port>/metrics
+```
+### 3. Datadog agent: modyfi the yaml file to use integration
+
+## Notes
+- Ensure that the Kubernetes components are accessible from the Datadog Agent.
+- Create services for the pods of the Kubernetes components to enable Datadog auto-discovery.
+- Validate your configuration by checking the Datadog dashboard for the metrics.
+- Use the following command to apply the manifest files:
+  ```bash
+  kubectl apply -f <manifest-file>
+- Create a service to that pod (For using auto discovery in Datadog)
+- Modify datadog-values.yaml file (Use HELM to install datadog to K8s cluster - ref "link")
