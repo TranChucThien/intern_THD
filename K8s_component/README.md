@@ -29,12 +29,3 @@ Once the metrics are enabled, you can test the endpoints by using `curl`. Exampl
 
 ```bash
 curl http://<component-bind-address>:<port>/metrics  
-
-
-
-
-
-
-
-
-
