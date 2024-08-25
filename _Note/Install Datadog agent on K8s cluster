@@ -1,0 +1,28 @@
+1. Install helm
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+
+2. Install Datadog agent
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
+
+//Configure datadog-values.yaml
+datadog:
+ apiKeyExistingSecret: datadog-secret
+ site: <DATADOG_SITE> # Datadog site (e.g. datadoghq.com, us5.datadoghq.com)
+
+//Install Datadog agent
+helm install datadog-agent -f datadog-values.yaml datadog/datadog
+
+//Verify the installation
+kubectl get pods -l app.kubernetes.io/name=datadog-agent
+
+//Uninstall Datadog agent
+helm uninstall datadog-agent
+
+//Update Datadog agent
+helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
