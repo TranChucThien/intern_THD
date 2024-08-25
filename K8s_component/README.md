@@ -20,7 +20,7 @@ Refer to the sample configurations in the provided `K8s_component_metrics.docx` 
 Once the metrics are enabled, you can test the endpoints by using `curl`. Example:
 
 ```bash
-curl http://<component-bind-address>:<port>/metrics
+curl http://<component-pod-ip>:<port>/metrics
 ```
 ### 3. Datadog agent: modyfi the yaml file to use integration
 
