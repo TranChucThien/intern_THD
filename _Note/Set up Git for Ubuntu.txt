@@ -1,0 +1,11 @@
+##Download Git for Ubuntu
+sudo apt-get install git -y
+git version
+sudo snap install gh
+gh auth login (HTTPS, Authen with GitHub credentials)
+git config --global user.name 'ThienNoob'
+git config --global user.email '102866314+ThienNoob@users.noreply.github.com'
+
+
+##Paste token vào là đăng nhập  
+Lấy GitHub token tại Setting -> Developer Setting -> Personal access tokens
