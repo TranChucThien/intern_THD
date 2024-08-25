@@ -1,0 +1,21 @@
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  site: us5.datadoghq.com
+  confd:
+    openmetrics.yaml: |-
+      ad_identifiers:
+        - controller
+      init_config:
+      instances:
+        - openmetrics_endpoint: "http://%%host%%:7472/metrics"
+          namespace: "cthien_metal"
+          metrics:
+            - ".*"
+          tags:
+            - "env:k3s"
+    kube_scheduler.yaml: |-
+      init_config:
+      instances:
+        - prometheus_url: "http://%%host%%:10251/metrics"
+          tags:
+            - "env:k3s"

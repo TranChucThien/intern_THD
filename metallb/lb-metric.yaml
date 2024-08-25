@@ -1,0 +1,34 @@
+---
+# MetalLB Controller Metrics Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: metallb-controller-metrics
+  namespace: metallb-system
+spec:
+  type: LoadBalancer
+  ports:
+  - name: metrics
+    targetPort: 7472
+    port: 7470
+  selector:
+    app: metallb
+    component: controller
+
+---
+# MetalLB Speaker Metrics Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: metallb-speaker-metrics
+  namespace: metallb-system
+spec:
+  type: LoadBalancer
+  ports:
+  - name: metrics
+    targetPort: 7472
+    port: 7471
+  selector:
+    app: metallb
+    component: speaker
+
