@@ -1,0 +1,7 @@
+init_config:
+
+instances:
+  - openmetrics_endpoint: "http://localhost:8000/metrics"
+    namespace: "centrifugo_chthien"
+    metrics:
+      - ".*"
